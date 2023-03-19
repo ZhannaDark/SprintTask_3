@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style1.css">
+    <title>Converter currency</title>
+</head>
+<body style="margin-left: 70px; margin-top: 20px">
+<form class="ba" id="Conversion" action="" method="post">
+  <div style="display: flex;flex-wrap: wrap">
+    <div style="text-align: left">
+      <label class="lab1">Введите сумму:</label>
+      <div>
+        <input type="text" name="number" id="number" required>
+        <select class="sel" id="from">
+          <option selected="selected" disabled="disabled">Choose:</option>
+          <option value="KZT" id="kazakh">KZT</option>
+          <option value="USD" id="united">USD</option>
+          <option value="EUR" id="european">EUR</option>
+        </select>
+      </div>
+    </div>
+    <div style="text-align: left">
+      <b><label class="lab">KZT(tenge)</label></b>
+      <div class="spaces">
+        <input type="text" name="kzt" id="kzt">
+      </div>
+    </div>
+    <div style="text-align: left">
+      <b><label class="lab">USD(dollar)</label></b>
+      <div class="spaces">
+        <input type="text" name="usd" id="usd">
+      </div>
+    </div>
+    <div style="text-align: left">
+      <b><label class="lab">EUR(euro)</label></b>
+      <div class="spaces">
+        <input type="text" name="eur" id="eur">
+      </div>
+    </div>
+  </div>
+</form>
+<script>
+   let select = document.querySelector('select');
+   select.onchange = function() {
+     let kzt, usd, eur;
+     let indexSel = select.selectedIndex, option = select.querySelectorAll('option')[indexSel];
+     let selectId = option.getAttribute('id');
+     if (selectId == 'kazakh') {
+       kzt = document.getElementById('number').value;
+       document.getElementById("kzt").value = '--';
+       usd = kzt / 431;
+       usd = usd.toFixed(2);
+       eur = kzt / 509;
+       eur = eur.toFixed(2);
+       document.getElementById("usd").value = usd;
+       document.getElementById("eur").value = eur;
+     }
+     if (selectId == 'united') {
+       usd = document.getElementById('number').value;
+       document.getElementById('usd').value = '--';
+       kzt = (usd * 429).toFixed(2);
+       eur = (usd * 429 / 509).toFixed(2);
+       document.getElementById('kzt').value = kzt;
+       document.getElementById('eur').value = eur;
+     }
+     if (selectId == 'european') {
+       eur = document.getElementById('number').value;
+       document.getElementById('eur').value = '--';
+       kzt = (eur * 507).toFixed(2);
+       usd = (eur * 507 / 431).toFixed(2);
+       document.getElementById('kzt').value = kzt;
+       document.getElementById('usd').value = usd;
+     }
+ }
+</script>
+</body>
+</html>
